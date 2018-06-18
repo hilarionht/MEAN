@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="row">
+        <div class="col s5">
+            <div class="card">
+                <div class="card-content">
+                    <form #userForm="ngForm" (ngSubmit)="addUser(userForm)">
+                        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="selectedUser._id">
+                        <div class="row">
+                            <div class="input-field col-s12">
+                                <input type="text" name="name" #name="ngModel" [(ngModel)]="selectedUser.name" placeholder="Enter your FullName">
+                            </div>
+                            <div class="input-field col-s12">
+                                <input type="date" class="datepicker" name="dateAdd" #name="ngModel" [(ngModel)]="selectedUser.dateAdd" placeholder="Enter your date">
+                            </div>
+                            <div class="input-field col-s12">
+                                <input type="email" name="email" #name="ngModel" [(ngModel)]="selectedUser.email" placeholder="Enter your email">
+                            </div>
+                            <div class="input-field col-s12">
+                                <input type="password" name="password" #name="ngModel" [(ngModel)]="selectedUser.password" value="0" placeholder="Enter your password">
+                            </div>
+                            <div class="card-action">
+                                <div class="input-field col-s12">
+                                    <button class="btn right" style="margin-left: 2px;" (click)="resetForm(userForm)">Clean</button>
+                                    <button class="btn right">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col s7">
+            <table class="striped highlight black-text">
+                <thead>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Date Add</th>
+                    <th>Status</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of userService.users">
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.dateAdd }}</td>
+                        <td>{{ user.estatus }}</td>
+                        <td>
+                            <a (click)="editUser(user)">
+                                <i class="material-icons">edit</i>
+                            </a>
+                            <a (click)="deleteUser(user._id, userForm)">
+                                <i class="material-icons">delete</i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
